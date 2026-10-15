@@ -250,9 +250,9 @@ footer p{margin:0 0 6px}
 const CONFIG = {
   orderEmailEndpoint: "https://formsubmit.co/ae4d5c71b0ae64486b510bd06b47c943",   // orders go to Jesse by email through FormSubmit; blank = preview mode
   pay: {
-    report: "https://buy.stripe.com/test_aFacN5gbqekf1Y388o33W00",          // $29, TEST mode
-    reportAttached: "https://buy.stripe.com/test_cNi3cvcZecc7cCH4Wc33W01",  // $39, TEST mode
-    drawings: "https://buy.stripe.com/test_3cIdR94sI8ZV9qvagw33W02"         // $149, TEST mode
+    report: "https://buy.stripe.com/14A8wO4ec2T51ub7ROgEg00",          // $29, live
+    reportAttached: "https://buy.stripe.com/28E3cufWU0KX3CjfkggEg02",  // $39, live
+    drawings: "https://buy.stripe.com/bJe28q7qo3X94Gn4FCgEg01"         // $149, live
   }
 };
 
@@ -314,12 +314,7 @@ form.addEventListener("submit", e => {
     e.preventDefault();
     const m = $("msg");
     m.textContent = "Preview mode: order " + no + " for $" + o.amount + " was not emailed. ";
-    if (pay) {
-      const a = document.createElement("a");
-      a.href = pay.toString(); a.target = "_blank"; a.rel = "noopener";
-      a.textContent = "Open the Stripe test checkout";
-      m.append(a, document.createTextNode(" (test card 4242 4242 4242 4242, any future date, any CVC)."));
-    }
+    m.append(document.createTextNode("Checkout is live, so preview mode does not open it."));
     m.hidden = false;
     return;
   }
