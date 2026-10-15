@@ -84,6 +84,17 @@ button.go[disabled]{opacity:.6;cursor:wait}
 .msg{border-radius:6px;padding:12px 14px;font-size:15px;background:var(--accent-soft)}
 footer{border-top:1px solid var(--line);padding-block:20px 32px;color:var(--muted);font-size:14px}
 footer p{margin:0 0 6px}
+.q{display:grid;gap:6px}
+.ql{font:600 14px/1.3 var(--label)}
+.opts{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center}
+.opts .choice{font-size:16px}
+em.std{font:700 10px/1 var(--label);letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-style:normal;margin-left:4px;vertical-align:2px}
+input.mini{width:auto;flex:1 1 150px;max-width:240px;padding:8px 10px;font-size:16px}
+.wallrow{display:grid;grid-template-columns:90px minmax(0,1fr) minmax(0,1.3fr);gap:10px;align-items:center}
+.wallrow input.mini{max-width:none;width:100%}
+@media (max-width:520px){.wallrow{grid-template-columns:1fr 1fr}.wallrow .ql{grid-column:1/-1}}
+.codes{display:flex;flex-wrap:wrap;gap:6px 14px;margin:0;font-size:14px;color:var(--muted)}
+.codes b{color:var(--ink)}
 @media (prefers-reduced-motion: reduce){*{transition:none!important}}
 </style>
 
@@ -108,7 +119,7 @@ footer p{margin:0 0 6px}
   <form id="order" method="POST" enctype="multipart/form-data" novalidate>
   <main>
     <section class="step" aria-labelledby="s1">
-      <div class="step-head"><span class="num">1</span><h2 id="s1">Choose what you need</h2></div>
+      <div class="step-head"><span class="num">00</span><h2 id="s1">Choose what you need</h2></div>
       <div class="services">
         <label class="svc">
           <input type="radio" name="Service" id="svc-report" value="Complete Material Report" checked>
@@ -139,83 +150,122 @@ footer p{margin:0 0 6px}
           </span>
         </label>
       </div>
-      <label class="choice" for="attached"><input type="checkbox" id="attached" name="Attached roof" value="Yes"> <span>My building has a porch, lean-to, wrap-around or other attached roof</span></label>
+      <label class="choice" for="attached"><input type="checkbox" id="attached" name="Has attached roof" value="Yes"> <span>My building has a porch, lean-to, wrap-around or other attached roof (tell us about it in 08)</span></label>
     </section>
 
-    <section class="step" aria-labelledby="s2">
-      <div class="step-head"><span class="num">2</span><h2 id="s2">Your contact details</h2></div>
-      <div class="panel">
+
+    <section class="step" aria-labelledby="s01">
+      <div class="step-head"><span class="num">01</span><h2 id="s01">About you</h2></div>
+      <p class="fine">Answer what you can. Not sure? Skip it and we use our <strong>standard</strong>, or ask.</p><div class="panel">
         <div class="row">
-          <label class="f" for="name">Full name<input type="text" id="name" name="Name" autocomplete="name" required></label>
-          <label class="f" for="email">Email for your files<input type="email" id="email" name="email" autocomplete="email" required></label>
-        </div>
-        <div class="row">
+          <label class="f" for="name">Name<input type="text" id="name" name="Name" autocomplete="name" required></label>
           <label class="f" for="phone">Phone<input type="tel" id="phone" name="Phone" autocomplete="tel"></label>
-          <label class="f" for="site">Building site ZIP or county<input type="text" id="site" name="Building site" placeholder="44663 or Tuscarawas County, OH"></label>
         </div>
-        <div class="choices">
-          <span class="f" style="font:600 14px var(--label)">I am a</span>
-          <label class="choice" for="who-home"><input type="radio" id="who-home" name="Customer type" value="Homeowner" checked> <span>Homeowner</span></label>
-          <label class="choice" for="who-pro"><input type="radio" id="who-pro" name="Customer type" value="Contractor"> <span>Contractor</span></label>
+        <div class="row">
+          <label class="f" for="email">Email for your files<input type="email" id="email" name="email" autocomplete="email" required></label>
+          <label class="f" for="builder">Builder<input type="text" id="builder" name="Builder" placeholder="If you have one"></label>
         </div>
+        <label class="f" for="site">Building site ZIP or county<input type="text" id="site" name="Building site" placeholder="44663 or Tuscarawas County, OH"></label>
+<div class="q"><span class="ql">Reach me by</span><div class="opts"><label class="choice" for="c1"><input type="checkbox" id="c1" name="Reach me by: Text" value="Yes" data-group="Reach me by"> <span>Text</span></label><label class="choice" for="c2"><input type="checkbox" id="c2" name="Reach me by: Call" value="Yes" data-group="Reach me by"> <span>Call</span></label><label class="choice" for="c3"><input type="checkbox" id="c3" name="Reach me by: Email" value="Yes" data-group="Reach me by"> <span>Email</span></label><label class="choice" for="c4"><input type="checkbox" id="c4" name="Reach me by: Messenger" value="Yes" data-group="Reach me by"> <span>Messenger</span></label></div></div><div class="q"><span class="ql">Used for</span><div class="opts"><label class="choice" for="c5"><input type="checkbox" id="c5" name="Used for: Shop" value="Yes" data-group="Used for"> <span>Shop</span></label><label class="choice" for="c6"><input type="checkbox" id="c6" name="Used for: Storage" value="Yes" data-group="Used for"> <span>Storage</span></label><label class="choice" for="c7"><input type="checkbox" id="c7" name="Used for: Animals" value="Yes" data-group="Used for"> <span>Animals</span></label><label class="choice" for="c8"><input type="checkbox" id="c8" name="Used for: Home" value="Yes" data-group="Used for"> <span>Home</span></label><label class="choice" for="c9"><input type="checkbox" id="c9" name="Used for: Other" value="Yes" data-group="Used for"> <span>Other</span></label></div></div><div class="q"><span class="ql">I am a</span><div class="opts"><label class="choice" for="r10"><input type="radio" id="r10" name="Customer type" value="Homeowner" checked> <span>Homeowner</span></label><label class="choice" for="r11"><input type="radio" id="r11" name="Customer type" value="Contractor"> <span>Contractor</span></label></div></div>
       </div>
     </section>
 
-    <section class="step" aria-labelledby="s3">
-      <div class="step-head"><span class="num">3</span><h2 id="s3">Your building</h2></div>
+    <section class="step" aria-labelledby="s02">
+      <div class="step-head"><span class="num">02</span><h2 id="s02">Size and shape</h2></div>
       <div class="panel">
-        <label class="f" for="btype">Type of building
-          <select id="btype" name="Building type">
-            <option>Pole barn</option><option>Garage</option><option>Shop</option>
-            <option>Shop house or barndominium</option><option>Horse or livestock barn</option>
-            <option>Storage shed</option><option>Other</option>
-          </select>
-        </label>
         <div class="row">
           <label class="f" for="w">Width (ft)<input type="number" id="w" name="Width ft" inputmode="decimal" min="8" placeholder="40"></label>
           <label class="f" for="l">Length (ft)<input type="number" id="l" name="Length ft" inputmode="decimal" min="8" placeholder="60"></label>
           <label class="f" for="h">Wall height (ft)<input type="number" id="h" name="Wall height ft" inputmode="decimal" min="6" placeholder="14"></label>
         </div>
-        <div class="row">
-          <label class="f" for="pitch">Roof pitch
-            <select id="pitch" name="Roof pitch"><option>Not sure</option><option>3/12</option><option>4/12</option><option>5/12</option><option>6/12</option><option>Other</option></select>
-          </label>
-          <label class="f" for="liner">Inside liner and insulation
-            <select id="liner" name="Liner and insulation"><option>No</option><option>Yes</option><option>Not sure</option></select>
-          </label>
-        </div>
-        <div class="row">
-          <label class="f" for="c-wall">Wall color
-            <select id="c-wall" name="Wall color"><option>Not sure</option><option>White</option><option>Light gray</option><option>Charcoal</option><option>Black</option><option>Tan</option><option>Brown</option><option>Barn red</option><option>Forest green</option><option>Dark blue</option><option>Other (say in notes)</option></select></label>
-          <label class="f" for="c-roof">Roof color
-            <select id="c-roof" name="Roof color"><option>Not sure</option><option>White</option><option>Light gray</option><option>Charcoal</option><option>Black</option><option>Tan</option><option>Brown</option><option>Barn red</option><option>Forest green</option><option>Dark blue</option><option>Other (say in notes)</option></select></label>
-        </div>
-        <div class="row">
-          <label class="f" for="c-trim">Trim color
-            <select id="c-trim" name="Trim color"><option>Not sure</option><option>White</option><option>Light gray</option><option>Charcoal</option><option>Black</option><option>Tan</option><option>Brown</option><option>Barn red</option><option>Forest green</option><option>Dark blue</option><option>Other (say in notes)</option></select></label>
-          <label class="f" for="c-wains">Wainscot
-            <select id="c-wains" name="Wainscot"><option>None</option><option>Not sure</option><option>White</option><option>Light gray</option><option>Charcoal</option><option>Black</option><option>Tan</option><option>Brown</option><option>Barn red</option><option>Forest green</option><option>Dark blue</option><option>Stone</option></select></label>
-          <label class="f" for="c-door">Door color
-            <select id="c-door" name="Door color"><option>Not sure</option><option>White</option><option>Almond</option><option>Sandtone</option><option>Chocolate</option><option>Gray</option><option>Charcoal</option><option>Black</option><option>Bronze</option><option>Red</option><option>Blue</option></select></label>
-        </div>
-        <label class="f" for="doors">Doors and windows<span class="hint">Garage doors with sizes, walk doors, windows, and which wall each goes on.</span>
-          <textarea id="doors" name="Doors and windows" placeholder="2 garage doors 12x12 on the front, 1 walk door on the side, 4 windows 3x4"></textarea></label>
-        <label class="f" for="extras">Porches, lean-tos and anything else<span class="hint">Sizes and which side, or anything else you want us to know.</span>
-          <textarea id="extras" name="Porches lean-tos and notes" placeholder="10 ft porch across the front, 12 ft lean-to on the right side"></textarea></label>
+<div class="q"><span class="ql">Roof pitch</span><div class="opts"><label class="choice" for="r12"><input type="radio" id="r12" name="Roof pitch" value="3/12"> <span>3/12</span></label><label class="choice" for="r13"><input type="radio" id="r13" name="Roof pitch" value="4/12" checked> <span>4/12 <em class="std">standard</em></span></label><label class="choice" for="r14"><input type="radio" id="r14" name="Roof pitch" value="5/12"> <span>5/12</span></label><label class="choice" for="r15"><input type="radio" id="r15" name="Roof pitch" value="6/12"> <span>6/12</span></label><label class="choice" for="r16"><input type="radio" id="r16" name="Roof pitch" value="Other"> <span>Other</span></label><input type="text" class="mini" name="Roof pitch other" aria-label="Roof pitch, other" placeholder="e.g. 8/12"></div></div><div class="q"><span class="ql">Ceiling</span><div class="opts"><label class="choice" for="r17"><input type="radio" id="r17" name="Ceiling" value="Flat" checked> <span>Flat <em class="std">standard</em></span></label><label class="choice" for="r18"><input type="radio" id="r18" name="Ceiling" value="Vaulted (scissor trusses)"> <span>Vaulted (scissor trusses)</span></label></div></div><div class="q"><span class="ql">Overhangs</span><div class="opts"><label class="choice" for="r19"><input type="radio" id="r19" name="Overhangs" value="None"> <span>None</span></label><label class="choice" for="r20"><input type="radio" id="r20" name="Overhangs" value="12&quot;" checked> <span>12" <em class="std">standard</em></span></label><label class="choice" for="r21"><input type="radio" id="r21" name="Overhangs" value="18&quot;"> <span>18"</span></label><label class="choice" for="r22"><input type="radio" id="r22" name="Overhangs" value="24&quot;"> <span>24"</span></label><label class="choice" for="r23"><input type="radio" id="r23" name="Overhangs" value="Other"> <span>Other</span></label><input type="text" class="mini" name="Overhangs other" aria-label="Overhangs, other" placeholder="e.g. 30""></div></div><div class="q"><span class="ql">Post spacing</span><div class="opts"><label class="choice" for="r24"><input type="radio" id="r24" name="Post spacing" value="8&#x27;" checked> <span>8' <em class="std">standard</em></span></label><label class="choice" for="r25"><input type="radio" id="r25" name="Post spacing" value="10&#x27;"> <span>10'</span></label><label class="choice" for="r26"><input type="radio" id="r26" name="Post spacing" value="12&#x27;"> <span>12'</span></label><label class="choice" for="r27"><input type="radio" id="r27" name="Post spacing" value="Other"> <span>Other</span></label><input type="text" class="mini" name="Post spacing other" aria-label="Post spacing, other" placeholder="e.g. 9'"></div></div><div class="q"><span class="ql">Walls on</span><div class="opts"><label class="choice" for="r28"><input type="radio" id="r28" name="Walls on" value="Posts in ground" checked> <span>Posts in ground <em class="std">standard</em></span></label><label class="choice" for="r29"><input type="radio" id="r29" name="Walls on" value="Concrete wall"> <span>Concrete wall</span></label></div><input type="text" class="mini" name="Concrete wall height ft" aria-label="Concrete wall height in feet" placeholder="Concrete wall height, ft"></div>
       </div>
     </section>
 
-    <section class="step" aria-labelledby="s4">
-      <div class="step-head"><span class="num">4</span><h2 id="s4">Plans, sketches or photos</h2></div>
-      <div class="file">
-        <label class="f" for="files">Add files (optional)<span class="hint">A photo of a hand sketch works. PDF, JPG or PNG.</span></label>
-        <input type="file" id="files" name="attachment" accept=".pdf,.jpg,.jpeg,.png,.heic,image/*,application/pdf" multiple>
-        <span class="note" id="filenote">Up to 10 MB in total.</span>
+    <section class="step" aria-labelledby="s03">
+      <div class="step-head"><span class="num">03</span><h2 id="s03">Walls</h2></div>
+      <p class="fine">Facing the front of the building. Partly open means metal at the top only.</p><div class="panel">
+        <div class="wallrow"><label class="ql" for="wall30">Front</label>
+          <select id="wall30" name="Front wall"><option>Enclosed</option><option>Open</option><option>Partly open</option></select>
+          <input type="number" class="mini" name="Front metal comes down ft" inputmode="decimal" min="0" aria-label="Front, if partly open: metal comes down, ft" placeholder="Metal down, ft"></div>
+        <div class="wallrow"><label class="ql" for="wall31">Back</label>
+          <select id="wall31" name="Back wall"><option>Enclosed</option><option>Open</option><option>Partly open</option></select>
+          <input type="number" class="mini" name="Back metal comes down ft" inputmode="decimal" min="0" aria-label="Back, if partly open: metal comes down, ft" placeholder="Metal down, ft"></div>
+        <div class="wallrow"><label class="ql" for="wall32">Left side</label>
+          <select id="wall32" name="Left side wall"><option>Enclosed</option><option>Open</option><option>Partly open</option></select>
+          <input type="number" class="mini" name="Left side metal comes down ft" inputmode="decimal" min="0" aria-label="Left side, if partly open: metal comes down, ft" placeholder="Metal down, ft"></div>
+        <div class="wallrow"><label class="ql" for="wall33">Right side</label>
+          <select id="wall33" name="Right side wall"><option>Enclosed</option><option>Open</option><option>Partly open</option></select>
+          <input type="number" class="mini" name="Right side metal comes down ft" inputmode="decimal" min="0" aria-label="Right side, if partly open: metal comes down, ft" placeholder="Metal down, ft"></div>
+
+      </div>
+    </section>
+
+    <section class="step" aria-labelledby="s04">
+      <div class="step-head"><span class="num">04</span><h2 id="s04">Roof and finishes</h2></div>
+      <div class="panel">
+<div class="q"><span class="ql">Roof</span><div class="opts"><label class="choice" for="r34"><input type="radio" id="r34" name="Roof" value="Metal" checked> <span>Metal <em class="std">standard</em></span></label><label class="choice" for="r35"><input type="radio" id="r35" name="Roof" value="Shingles"> <span>Shingles</span></label></div></div><div class="q"><span class="ql">Siding</span><div class="opts"><label class="choice" for="r36"><input type="radio" id="r36" name="Siding" value="Metal" checked> <span>Metal <em class="std">standard</em></span></label><label class="choice" for="r37"><input type="radio" id="r37" name="Siding" value="Vinyl"> <span>Vinyl</span></label></div></div><div class="q"><span class="ql">Wainscot</span><div class="opts"><label class="choice" for="r38"><input type="radio" id="r38" name="Wainscot" value="None" checked> <span>None <em class="std">standard</em></span></label><label class="choice" for="r39"><input type="radio" id="r39" name="Wainscot" value="Metal"> <span>Metal</span></label><label class="choice" for="r40"><input type="radio" id="r40" name="Wainscot" value="Stone look"> <span>Stone look</span></label></div><span class="ql" style="font-weight:500">Height</span><div class="opts"><label class="choice" for="r41"><input type="radio" id="r41" name="Wainscot height" value="36&quot;" checked> <span>36" <em class="std">standard</em></span></label><label class="choice" for="r42"><input type="radio" id="r42" name="Wainscot height" value="48&quot;"> <span>48"</span></label></div></div><div class="q"><span class="ql">Vapor barrier</span><div class="opts"><label class="choice" for="r43"><input type="radio" id="r43" name="Vapor barrier" value="Roof" checked> <span>Roof <em class="std">standard</em></span></label><label class="choice" for="r44"><input type="radio" id="r44" name="Vapor barrier" value="Roof + walls"> <span>Roof + walls</span></label><label class="choice" for="r45"><input type="radio" id="r45" name="Vapor barrier" value="None"> <span>None</span></label></div></div><div class="q"><span class="ql">Soffit</span><div class="opts"><label class="choice" for="r46"><input type="radio" id="r46" name="Soffit" value="None"> <span>None</span></label><label class="choice" for="r47"><input type="radio" id="r47" name="Soffit" value="Metal" checked> <span>Metal <em class="std">standard</em></span></label><label class="choice" for="r48"><input type="radio" id="r48" name="Soffit" value="Vinyl"> <span>Vinyl</span></label></div></div>
+      </div>
+    </section>
+
+    <section class="step" aria-labelledby="s05">
+      <div class="step-head"><span class="num">05</span><h2 id="s05">Colors</h2></div>
+      <p class="fine">Pick from our colors or write a color name.</p><div class="panel">
+        <div class="row">
+<label class="f" for="c-roof">Roof<select id="c-roof" name="Roof color"><option>Not sure</option><option>White</option><option>Light gray</option><option>Charcoal</option><option>Black</option><option>Tan</option><option>Brown</option><option>Barn red</option><option>Green</option><option>Blue</option><option>Other (say below)</option></select></label><label class="f" for="c-wall">Walls<select id="c-wall" name="Wall color"><option>Not sure</option><option>White</option><option>Light gray</option><option>Charcoal</option><option>Black</option><option>Tan</option><option>Brown</option><option>Barn red</option><option>Green</option><option>Blue</option><option>Other (say below)</option></select></label><label class="f" for="c-trim">Trim<select id="c-trim" name="Trim color"><option>Not sure</option><option>White</option><option>Light gray</option><option>Charcoal</option><option>Black</option><option>Tan</option><option>Brown</option><option>Barn red</option><option>Green</option><option>Blue</option><option>Other (say below)</option></select></label>
+        </div>
+        <div class="row">
+<label class="f" for="c-wains">Wainscot<select id="c-wains" name="Wainscot color"><option>Not sure</option><option>White</option><option>Light gray</option><option>Charcoal</option><option>Black</option><option>Tan</option><option>Brown</option><option>Barn red</option><option>Green</option><option>Blue</option><option>Other (say below)</option></select></label><label class="f" for="c-door">Doors<select id="c-door" name="Door color"><option>Not sure</option><option>White</option><option>Light gray</option><option>Charcoal</option><option>Black</option><option>Tan</option><option>Brown</option><option>Barn red</option><option>Green</option><option>Blue</option><option>Other (say below)</option></select></label><label class="f" for="c-soffit">Soffit<select id="c-soffit" name="Soffit color"><option>Not sure</option><option>White</option><option>Light gray</option><option>Charcoal</option><option>Black</option><option>Tan</option><option>Brown</option><option>Barn red</option><option>Green</option><option>Blue</option><option>Other (say below)</option></select></label>
+        </div>
+        <label class="f" for="c-other">Other colors<input type="text" id="c-other" name="Other colors" placeholder="Write a color name, e.g. Ocean blue"></label>
+
+      </div>
+    </section>
+
+    <section class="step" aria-labelledby="s06">
+      <div class="step-head"><span class="num">06</span><h2 id="s06">Inside</h2></div>
+      <div class="panel">
+<div class="q"><span class="ql">Metal liner</span><div class="opts"><label class="choice" for="c49"><input type="checkbox" id="c49" name="Metal liner: Walls" value="Yes" data-group="Metal liner"> <span>Walls</span></label><label class="choice" for="c50"><input type="checkbox" id="c50" name="Metal liner: Ceiling" value="Yes" data-group="Metal liner"> <span>Ceiling</span></label></div></div><div class="q"><span class="ql">Insulation</span><div class="opts"><label class="choice" for="c51"><input type="checkbox" id="c51" name="Insulation: Walls" value="Yes" data-group="Insulation"> <span>Walls</span></label><label class="choice" for="c52"><input type="checkbox" id="c52" name="Insulation: Ceiling" value="Yes" data-group="Insulation"> <span>Ceiling</span></label></div></div><p class="fine">Leave both blank for none.</p>
+      </div>
+    </section>
+
+    <section class="step" aria-labelledby="s07">
+      <div class="step-head"><span class="num">07</span><h2 id="s07">Sketch: doors and windows</h2></div>
+      <div class="panel">
+        <p class="fine">Draw the building from above with its width and length, then write each opening on its wall, with its size. Snap a photo of the sketch and add it here, or list the openings below.</p>
+        <p class="codes"><span><b>OH 12×12</b> garage door</span><span>door later? add <b>F</b> framing only or <b>P</b> posts only</span><span><b>MD</b> man door (36×80)</span><span><b>W 3×4</b> window</span><span><b>SL 10×10</b> sliding door</span><span><b>V</b> vent</span></p>
+        <div class="file">
+          <label class="f" for="files">Add your sketch, plans or photos<span class="hint">A phone photo of a hand sketch works. PDF, JPG or PNG.</span></label>
+          <input type="file" id="files" name="attachment" accept=".pdf,.jpg,.jpeg,.png,.heic,image/*,application/pdf" multiple>
+          <span class="note" id="filenote">Up to 10 MB in total.</span>
+        </div>
+        <label class="f" for="doors">Doors and windows<span class="hint">Each opening, its size and the wall it goes on.</span>
+          <textarea id="doors" name="Doors and windows" placeholder="Front: OH 12x12, 4 ft from the left corner. Right side: MD, W 3x4 twice. Back: OH 10x10 F"></textarea></label>
+
+      </div>
+    </section>
+
+    <section class="step" aria-labelledby="s08">
+      <div class="step-head"><span class="num">08</span><h2 id="s08">Attached roofs</h2></div>
+      <p class="fine">Tick any you want.</p><div class="panel">
+<div class="q"><span class="ql">Type</span><div class="opts"><label class="choice" for="c53"><input type="checkbox" id="c53" name="Attached roof: Lean-to" value="Yes" data-group="Attached roof"> <span>Lean-to (shed roof along one wall)</span></label><label class="choice" for="c54"><input type="checkbox" id="c54" name="Attached roof: Porch" value="Yes" data-group="Attached roof"> <span>Porch (small gable roof over a door)</span></label><label class="choice" for="c55"><input type="checkbox" id="c55" name="Attached roof: Corner wrap-around" value="Yes" data-group="Attached roof"> <span>Corner wrap-around (around two sides, one corner)</span></label><label class="choice" for="c56"><input type="checkbox" id="c56" name="Attached roof: Full wrap-around" value="Yes" data-group="Attached roof"> <span>Full wrap-around (all the way around the building)</span></label></div></div>        <div class="row">
+          <label class="f" for="ar-wall">Which wall(s)<input type="text" id="ar-wall" name="Attached roof walls" placeholder="Front and right side"></label>
+          <label class="f" for="ar-depth">Depth out (ft)<input type="number" id="ar-depth" name="Attached roof depth ft" inputmode="decimal" min="0" placeholder="12"></label>
+        </div>
+<div class="q"><span class="ql">Sides</span><div class="opts"><label class="choice" for="r57"><input type="radio" id="r57" name="Attached roof sides" value="Open" checked> <span>Open <em class="std">standard</em></span></label><label class="choice" for="r58"><input type="radio" id="r58" name="Attached roof sides" value="Enclosed"> <span>Enclosed</span></label></div></div><p class="fine">Draw it on your sketch too. Any attached roof adds $10 to the report.</p>
+      </div>
+    </section>
+
+    <section class="step" aria-labelledby="s09">
+      <div class="step-head"><span class="num">09</span><h2 id="s09">Anything else?</h2></div>
+      <div class="panel">
+        <label class="f" for="extras">Site, budget, timing<textarea id="extras" name="Anything else" placeholder="Sloped site, want to start in spring, budget about $40,000"></textarea></label>
+
       </div>
     </section>
 
     <section class="step" aria-labelledby="s5">
-      <div class="step-head"><span class="num">5</span><h2 id="s5">Review and pay</h2></div>
+      <div class="step-head"><span class="num">10</span><h2 id="s5">Review and pay</h2></div>
       <div class="panel">
         <label class="choice" for="ack"><input type="checkbox" id="ack" name="Acknowledged" value="Yes" required>
           <span>I understand BUILT drawings and reports are preliminary. They are not engineered, stamped, or approved for permits, and any drawings must be reviewed by a licensed engineer before building.</span></label>
@@ -274,6 +324,11 @@ function refresh(){
 }
 form.addEventListener("change", refresh);
 refresh();
+document.querySelectorAll('input[data-group="Attached roof"]').forEach(c => c.addEventListener("change", () => {
+  if ([...document.querySelectorAll('input[data-group="Attached roof"]')].some(x => x.checked)) { $("attached").checked = true; refresh(); }
+}));
+$("attached").addEventListener("change", () => { if ($("attached").checked) $("s08").scrollIntoView({behavior:"smooth", block:"start"}); });
+
 
 $("files").addEventListener("change", () => {
   const files = [...$("files").files];
@@ -292,7 +347,7 @@ form.addEventListener("submit", e => {
   if (!$("name").value.trim()) problems.push("your name");
   if (!/^\S+@\S+\.\S+$/.test($("email").value.trim())) problems.push("an email address for your files");
   if (!$("w").value || !$("l").value) problems.push("the building width and length");
-  if (!$("ack").checked) problems.push("the checkbox in step 5");
+  if (!$("ack").checked) problems.push("the checkbox in step 10");
   const size = [...$("files").files].reduce((s, f) => s + f.size, 0);
   if (size > MAX_BYTES) problems.push("files under 10 MB in total");
   if (problems.length) { e.preventDefault(); show("Please add " + problems.join(", ") + "."); return; }
