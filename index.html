@@ -328,6 +328,18 @@ refresh();
 document.querySelectorAll('input[data-group="Attached roof"]').forEach(c => c.addEventListener("change", () => {
   if ([...document.querySelectorAll('input[data-group="Attached roof"]')].some(x => x.checked)) { $("attached").checked = true; refresh(); }
 }));
+/* Visitor counts (GoatCounter, no cookies). Only the live site counts; preview mode does not. */
+function count(path, title){
+  try { if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({path, title, event:true}); } catch (_) {}
+}
+if (CONFIG.orderEmailEndpoint) {
+  const gc = document.createElement("script");
+  gc.async = true; gc.src = "https://gc.zgo.at/count.js";
+  gc.dataset.goatcounter = "https://builtorder.goatcounter.com/count";
+  document.head.appendChild(gc);
+}
+let started = false;
+form.addEventListener("input", () => { if (!started) { started = true; count("form-started", "Started the order form"); } });
 $("attached").addEventListener("change", () => { if ($("attached").checked) $("s08").scrollIntoView({behavior:"smooth", block:"start"}); });
 
 
@@ -374,6 +386,7 @@ form.addEventListener("submit", e => {
     m.hidden = false;
     return;
   }
+  count("checkout-" + o.key, "Sent to checkout: $" + o.amount + " " + o.label);
   $("next").value = pay.toString();
   form.action = CONFIG.orderEmailEndpoint;
   $("go").disabled = true;
