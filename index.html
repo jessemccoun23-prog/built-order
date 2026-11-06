@@ -46,6 +46,7 @@ main{display:grid;gap:28px;padding-block:20px 48px}
 section.step{display:grid;gap:14px}
 .step-head{display:flex;gap:12px;align-items:baseline}
 .num{font:700 13px/1 var(--label);color:var(--accent);letter-spacing:.1em;min-width:28px}
+[hidden]{display:none!important}
 .services{display:grid;grid-template-columns:repeat(auto-fit, minmax(250px, 1fr));gap:14px}
 .svc{position:relative;display:block;cursor:pointer}
 .svc input{position:absolute;opacity:0;pointer-events:none}
@@ -248,8 +249,22 @@ html:not(.giftmode) .gift, html.giftmode .giftcta{display:none}
             <span class="pick"></span>
           </span>
         </label>
+        <label class="svc">
+          <input type="radio" name="Service" id="svc-roof" value="Shingle Roof Estimate">
+          <span class="card">
+            <span class="price">$29</span>
+            <h3>Shingle Roof Estimate</h3>
+            <ul>
+              <li>Roof measured from aerial imagery: squares, pitches and waste</li>
+              <li>Full shingle material list: shingles, starter, ridge cap, underlayment, ice and water, drip edge, vents and flashing</li>
+              <li>Just send the address</li>
+              <li>Shingle roofs only</li>
+            </ul>
+            <span class="pick"></span>
+          </span>
+        </label>
       </div>
-      <label class="choice" for="attached"><input type="checkbox" id="attached" name="Has attached roof" value="Yes"> <span>My building has a porch, lean-to, wrap-around or other attached roof (tell us about it in 08), or a loft (06)</span></label>
+      <label class="choice barn-only" for="attached"><input type="checkbox" id="attached" name="Has attached roof" value="Yes"> <span>My building has a porch, lean-to, wrap-around or other attached roof (tell us about it in 08), or a loft (06)</span></label>
     </section>
 
 
@@ -266,6 +281,19 @@ html:not(.giftmode) .gift, html.giftmode .giftcta{display:none}
         </div>
         <label class="f" for="site">Building site ZIP or county<input type="text" id="site" name="Building site" placeholder="44663 or Tuscarawas County, OH"></label>
 <div class="q"><span class="ql">Reach me by</span><div class="opts"><label class="choice" for="c1"><input type="checkbox" id="c1" name="Reach me by: Text" value="Yes" data-group="Reach me by"> <span>Text</span></label><label class="choice" for="c2"><input type="checkbox" id="c2" name="Reach me by: Call" value="Yes" data-group="Reach me by"> <span>Call</span></label><label class="choice" for="c3"><input type="checkbox" id="c3" name="Reach me by: Email" value="Yes" data-group="Reach me by"> <span>Email</span></label><label class="choice" for="c4"><input type="checkbox" id="c4" name="Reach me by: Messenger" value="Yes" data-group="Reach me by"> <span>Messenger</span></label></div></div><div class="q"><span class="ql">Used for</span><div class="opts"><label class="choice" for="c5"><input type="checkbox" id="c5" name="Used for: Shop" value="Yes" data-group="Used for"> <span>Shop</span></label><label class="choice" for="c6"><input type="checkbox" id="c6" name="Used for: Storage" value="Yes" data-group="Used for"> <span>Storage</span></label><label class="choice" for="c7"><input type="checkbox" id="c7" name="Used for: Animals" value="Yes" data-group="Used for"> <span>Animals</span></label><label class="choice" for="c8"><input type="checkbox" id="c8" name="Used for: Home" value="Yes" data-group="Used for"> <span>Home</span></label><label class="choice" for="c9"><input type="checkbox" id="c9" name="Used for: Other" value="Yes" data-group="Used for"> <span>Other</span></label></div></div><div class="q"><span class="ql">I am a</span><div class="opts"><label class="choice" for="r10"><input type="radio" id="r10" name="Customer type" value="Homeowner" checked> <span>Homeowner</span></label><label class="choice" for="r11"><input type="radio" id="r11" name="Customer type" value="Contractor"> <span>Contractor</span></label></div></div>
+      </div>
+    </section>
+
+    <section class="step roof-only" aria-labelledby="sroof" hidden>
+      <div class="step-head"><span class="num">02</span><h2 id="sroof">Your roof</h2></div>
+      <div class="panel">
+        <label class="f" for="roofaddr">Address of the house or building<input type="text" id="roofaddr" name="Roof address" autocomplete="street-address" placeholder="123 Main St, New Philadelphia, OH 44663"></label>
+        <label class="f" for="roofbrand">Shingle brand and line<span class="hint">If you know it. Leave blank and we use a standard architectural shingle.</span><input type="text" id="roofbrand" name="Shingle brand" placeholder="Owens Corning Duration, GAF Timberline HDZ"></label>
+        <label class="f" for="roofnotes">Anything we should know<span class="hint">Which buildings on the property, tear-off and layers, gutters, skylights.</span><textarea id="roofnotes" name="Roof notes" placeholder="House and attached garage only. One layer to tear off."></textarea></label>
+        <div class="file">
+          <label class="f" for="rooffiles">Photos (optional)<span class="hint">Photos of the roof help us check chimneys, vents and skylights. JPG, PNG or PDF.</span></label>
+          <input type="file" id="rooffiles" name="attachment" accept=".pdf,.jpg,.jpeg,.png,.heic,image/*,application/pdf" multiple>
+        </div>
       </div>
     </section>
 
@@ -432,12 +460,31 @@ function stamp(prefix){
 }
 
 function order(){
+  if ($("svc-roof").checked) return {key:"report", amount:29, label:"Shingle Roof Estimate"};
   const drawings = $("svc-drawings").checked;
   const attached = $("attached").checked;
   if (drawings) return {key:"drawings", amount:149, label:"Preliminary Framing Drawings with free Complete Material Report"};
   if (attached) return {key:"reportAttached", amount:39, label:"Complete Material Report with porch, attached roof or loft (+$10)"};
   return {key:"report", amount:29, label:"Complete Material Report"};
 }
+/* Shingle roof estimate (2026-11-06): the barn steps are hidden and switched off, so their answers are not sent. */
+const barnSteps = [...document.querySelectorAll('section.step')].filter(s => /^s0[2-8]$/.test(s.getAttribute("aria-labelledby")));
+function setMode(){
+  const roof = $("svc-roof").checked;
+  barnSteps.concat([...document.querySelectorAll(".barn-only")]).forEach(el => {
+    el.hidden = roof;
+    el.querySelectorAll("input, select, textarea").forEach(f => f.disabled = roof);
+  });
+  document.querySelectorAll(".roof-only").forEach(el => {
+    el.hidden = !roof;
+    el.querySelectorAll("input, select, textarea").forEach(f => f.disabled = !roof);
+  });
+  if (roof) $("attached").checked = false;
+  // Steps after the roof read 03 and 04 instead of 09 and 10.
+  [["s09","09","03"],["s5","10","04"]].forEach(([id, barn, short]) => { document.querySelector('[aria-labelledby="' + id + '"] .num').textContent = roof ? short : barn; });
+}
+document.querySelectorAll('input[name="Service"]').forEach(r => r.addEventListener("change", setMode));
+setMode();
 function refresh(){
   const o = order();
   const code = giftCode();
@@ -473,9 +520,11 @@ form.addEventListener("submit", e => {
   const problems = [];
   if (!$("name").value.trim()) problems.push("your name");
   if (!/^\S+@\S+\.\S+$/.test($("email").value.trim())) problems.push("an email address for your files");
-  if (!$("w").value || !$("l").value) problems.push("the building width and length");
-  if (!$("ack").checked) problems.push("the checkbox in step 10");
-  const size = [...$("files").files].reduce((s, f) => s + f.size, 0);
+  const roof = $("svc-roof").checked;
+  if (roof && !$("roofaddr").value.trim()) problems.push("the address of the roof");
+  if (!roof && (!$("w").value || !$("l").value)) problems.push("the building width and length");
+  if (!$("ack").checked) problems.push("the checkbox in step " + (roof ? "04" : "10"));
+  const size = [...$("files").files, ...$("rooffiles").files].reduce((s, f) => s + f.size, 0);
   if (size > MAX_BYTES) problems.push("files under 10 MB in total");
   const code = giftCode();
   if (code && !GIFT_CODE.test(code)) problems.push("the gift code as it is on the certificate (GIFT-XXXX-XXXX)");
@@ -486,7 +535,7 @@ form.addEventListener("submit", e => {
   $("orderno").value = no;
   $("total").value = "$" + o.amount + " " + o.label;
   if (code) $("giftcode").value = code;
-  $("subject").value = "New BUILT order " + no + ": " + (code ? "gift code " + code + " for $" + o.amount : "$" + o.amount) + " " + ($("w").value + "x" + $("l").value);
+  $("subject").value = "New BUILT order " + no + ": " + (code ? "gift code " + code + " for $" + o.amount : "$" + o.amount) + " " + (roof ? "shingle roof, " + $("roofaddr").value.trim() : $("w").value + "x" + $("l").value);
 
   const link = CONFIG.pay[o.key];
   const pay = link ? new URL(link) : null;
