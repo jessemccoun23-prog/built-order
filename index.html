@@ -170,9 +170,9 @@ html:not(.giftmode) .gift, html.giftmode .giftcta{display:none}
       <form id="giftform" method="POST" novalidate>
         <div class="gopts" role="radiogroup" aria-label="Gift">
           <label class="choice" for="g-report"><input type="radio" id="g-report" name="Gift" value="Complete Material Report" checked> <span><b>$29</b> Complete Material Report</span></label>
-          <label class="choice" for="g-attached"><input type="radio" id="g-attached" name="Gift" value="Complete Material Report with attached roof"> <span><b>$39</b> Complete Material Report for a building with a porch, lean-to or other attached roof</span></label>
+          <label class="choice" for="g-attached"><input type="radio" id="g-attached" name="Gift" value="Complete Material Report with attached roof"> <span><b>$39</b> Complete Material Report for a building with a porch, lean-to, loft or other attached roof</span></label>
           <label class="choice" for="g-drawings"><input type="radio" id="g-drawings" name="Gift" value="Preliminary Framing Drawings + free report"> <span><b>$149</b> Preliminary Framing Drawings with DXF files and the Complete Material Report included free</span></label>
-          <p class="ghint">Not sure about an attached roof? Choose $29. If their building ends up with a porch or lean-to, they pay the $10 difference when they order.</p>
+          <p class="ghint">Not sure? Choose $29. If their building ends up with a porch, lean-to or loft, they pay the $10 difference when they order.</p>
         </div>
         <fieldset><legend>From</legend>
           <div class="row">
@@ -229,7 +229,7 @@ html:not(.giftmode) .gift, html.giftmode .giftcta{display:none}
               <li>Full lumber and metal material list</li>
               <li>Lumberyard and metal shop order sheets</li>
               <li>3D views of your building</li>
-              <li>Add $10 if the building has a porch, lean-to or other attached roof</li>
+              <li>Add $10 if the building has a porch, lean-to, loft or other attached roof (once, however many)</li>
             </ul>
             <span class="pick"></span>
           </span>
@@ -249,7 +249,7 @@ html:not(.giftmode) .gift, html.giftmode .giftcta{display:none}
           </span>
         </label>
       </div>
-      <label class="choice" for="attached"><input type="checkbox" id="attached" name="Has attached roof" value="Yes"> <span>My building has a porch, lean-to, wrap-around or other attached roof (tell us about it in 08)</span></label>
+      <label class="choice" for="attached"><input type="checkbox" id="attached" name="Has attached roof" value="Yes"> <span>My building has a porch, lean-to, wrap-around or other attached roof (tell us about it in 08), or a loft (06)</span></label>
     </section>
 
 
@@ -325,6 +325,13 @@ html:not(.giftmode) .gift, html.giftmode .giftcta{display:none}
       <div class="step-head"><span class="num">06</span><h2 id="s06">Inside</h2></div>
       <div class="panel">
 <div class="q"><span class="ql">Metal liner</span><div class="opts"><label class="choice" for="c49"><input type="checkbox" id="c49" name="Metal liner: Walls" value="Yes" data-group="Metal liner"> <span>Walls</span></label><label class="choice" for="c50"><input type="checkbox" id="c50" name="Metal liner: Ceiling" value="Yes" data-group="Metal liner"> <span>Ceiling</span></label></div></div><div class="q"><span class="ql">Insulation</span><div class="opts"><label class="choice" for="c51"><input type="checkbox" id="c51" name="Insulation: Walls" value="Yes" data-group="Insulation"> <span>Walls</span></label><label class="choice" for="c52"><input type="checkbox" id="c52" name="Insulation: Ceiling" value="Yes" data-group="Insulation"> <span>Ceiling</span></label></div></div><p class="fine">Leave both blank for none.</p>
+<div class="q"><span class="ql">Loft</span><div class="opts"><label class="choice" for="r90"><input type="radio" id="r90" name="Loft" value="None" checked> <span>None <em class="std">standard</em></span></label><label class="choice" for="r91"><input type="radio" id="r91" name="Loft" value="Storage"> <span>Storage loft</span></label><label class="choice" for="r92"><input type="radio" id="r92" name="Loft" value="Living space (40 psf)"> <span>Living space (bedroom, office)</span></label></div></div>
+        <div class="row">
+          <label class="f" for="loft-where">Loft location<input type="text" id="loft-where" name="Loft location" placeholder="Across the back wall"></label>
+          <label class="f" for="loft-depth">Loft depth (ft)<input type="number" id="loft-depth" name="Loft depth ft" inputmode="decimal" min="0" placeholder="12"></label>
+        </div>
+        <p class="fine">A loft adds $10 to the report, the same $10 as a porch or attached roof (once, however many).</p>
+
       </div>
     </section>
 
@@ -345,13 +352,14 @@ html:not(.giftmode) .gift, html.giftmode .giftcta{display:none}
     </section>
 
     <section class="step" aria-labelledby="s08">
-      <div class="step-head"><span class="num">08</span><h2 id="s08">Attached roofs</h2></div>
+      <div class="step-head"><span class="num">08</span><h2 id="s08">Attached roofs and porches</h2></div>
       <p class="fine">Tick any you want.</p><div class="panel">
-<div class="q"><span class="ql">Type</span><div class="opts"><label class="choice" for="c53"><input type="checkbox" id="c53" name="Attached roof: Lean-to" value="Yes" data-group="Attached roof"> <span>Lean-to (shed roof along one wall)</span></label><label class="choice" for="c54"><input type="checkbox" id="c54" name="Attached roof: Porch" value="Yes" data-group="Attached roof"> <span>Porch (small gable roof over a door)</span></label><label class="choice" for="c55"><input type="checkbox" id="c55" name="Attached roof: Corner wrap-around" value="Yes" data-group="Attached roof"> <span>Corner wrap-around (around two sides, one corner)</span></label><label class="choice" for="c56"><input type="checkbox" id="c56" name="Attached roof: Full wrap-around" value="Yes" data-group="Attached roof"> <span>Full wrap-around (all the way around the building)</span></label></div></div>        <div class="row">
+<div class="q"><span class="ql">Type</span><div class="opts"><label class="choice" for="c53"><input type="checkbox" id="c53" name="Attached roof: Lean-to" value="Yes" data-group="Attached roof"> <span>Lean-to (shed roof along one wall)</span></label><label class="choice" for="c54"><input type="checkbox" id="c54" name="Attached roof: Porch" value="Yes" data-group="Attached roof"> <span>Porch (small gable roof over a door)</span></label><label class="choice" for="c55"><input type="checkbox" id="c55" name="Attached roof: Corner wrap-around" value="Yes" data-group="Attached roof"> <span>Corner wrap-around (around two sides, one corner)</span></label><label class="choice" for="c56"><input type="checkbox" id="c56" name="Attached roof: Full wrap-around" value="Yes" data-group="Attached roof"> <span>Full wrap-around (all the way around the building)</span></label><label class="choice" for="c93"><input type="checkbox" id="c93" name="Attached roof: Truss porch" value="Yes" data-group="Attached roof"> <span>Truss porch (the roof trusses run past a side wall, so the porch is under the main roof)</span></label><label class="choice" for="c94"><input type="checkbox" id="c94" name="Attached roof: Recessed porch" value="Yes" data-group="Attached roof"> <span>Recessed porch (part of a side wall is set back under the main roof, with a door into the building)</span></label></div></div>        <div class="row">
           <label class="f" for="ar-wall">Which wall(s)<input type="text" id="ar-wall" name="Attached roof walls" placeholder="Front and right side"></label>
           <label class="f" for="ar-depth">Depth out (ft)<input type="number" id="ar-depth" name="Attached roof depth ft" inputmode="decimal" min="0" placeholder="12"></label>
         </div>
-<div class="q"><span class="ql">Sides</span><div class="opts"><label class="choice" for="r57"><input type="radio" id="r57" name="Attached roof sides" value="Open" checked> <span>Open <em class="std">standard</em></span></label><label class="choice" for="r58"><input type="radio" id="r58" name="Attached roof sides" value="Enclosed"> <span>Enclosed</span></label></div></div><p class="fine">Draw it on your sketch too. Any attached roof adds $10 to the report.</p>
+        <label class="f" for="ar-length">Porch length along the wall (ft)<span class="hint">Truss and recessed porches go on a side wall. Leave blank for the full length.</span><input type="text" id="ar-length" name="Porch length ft" placeholder="Full length, or 24 ft starting 8 ft from the front"></label>
+<div class="q"><span class="ql">Sides</span><div class="opts"><label class="choice" for="r57"><input type="radio" id="r57" name="Attached roof sides" value="Open" checked> <span>Open <em class="std">standard</em></span></label><label class="choice" for="r58"><input type="radio" id="r58" name="Attached roof sides" value="Enclosed"> <span>Enclosed</span></label></div></div><p class="fine">Draw it on your sketch too. Any attached roof or porch adds $10 to the report, once no matter how many.</p>
       </div>
     </section>
 
@@ -427,7 +435,7 @@ function order(){
   const drawings = $("svc-drawings").checked;
   const attached = $("attached").checked;
   if (drawings) return {key:"drawings", amount:149, label:"Preliminary Framing Drawings with free Complete Material Report"};
-  if (attached) return {key:"reportAttached", amount:39, label:"Complete Material Report, attached roof (+$10)"};
+  if (attached) return {key:"reportAttached", amount:39, label:"Complete Material Report with porch, attached roof or loft (+$10)"};
   return {key:"report", amount:29, label:"Complete Material Report"};
 }
 function refresh(){
@@ -442,6 +450,9 @@ $("giftcode").addEventListener("input", refresh);
 refresh();
 document.querySelectorAll('input[data-group="Attached roof"]').forEach(c => c.addEventListener("change", () => {
   if ([...document.querySelectorAll('input[data-group="Attached roof"]')].some(x => x.checked)) { $("attached").checked = true; refresh(); }
+}));
+document.querySelectorAll('input[name="Loft"]').forEach(r => r.addEventListener("change", () => {
+  if (r.checked && r.value !== "None") { $("attached").checked = true; refresh(); }
 }));
 $("attached").addEventListener("change", () => { if ($("attached").checked) $("s08").scrollIntoView({behavior:"smooth", block:"start"}); });
 
