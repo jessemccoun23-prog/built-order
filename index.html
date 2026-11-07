@@ -49,7 +49,7 @@ section.step{display:grid;gap:14px}
 .step-head{display:flex;gap:12px;align-items:baseline}
 .num{font:700 13px/1 var(--label);color:var(--accent);letter-spacing:.1em;min-width:28px}
 [hidden]{display:none!important}
-.tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:4px 0 0}
+.tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:4px 0 0}
 .tile{display:grid;gap:4px;align-content:start;text-align:left;background:var(--panel);border:2px solid var(--line);border-radius:8px;padding:14px;color:var(--ink);text-decoration:none;cursor:pointer;font:inherit}
 .tile:hover{border-color:var(--accent)}
 .tile:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
@@ -158,6 +158,7 @@ html:not(.giftmode) .gift, html.giftmode .giftcta{display:none}
       <a class="tile" href="#s1" data-pick="svc-report"><span class="tp">$29</span><span class="tn">Material report</span><span class="td">Lumber and metal lists, order sheets and 3D views</span></a>
       <a class="tile" href="#s1" data-pick="svc-roof"><span class="tp">$29</span><span class="tn">Shingle roof estimate</span><span class="td">Squares and a full shingle material list from your address. Contractors: your logo and labor price on request</span></a>
       <a class="tile" href="#s1" data-pick="svc-drawings"><span class="tp">$149</span><span class="tn">Framing drawings</span><span class="td">PDF and DXF drawing set, with the barn report free</span></a>
+      <a class="tile" href="#s1" data-pick="svc-call"><span class="tp">$39</span><span class="tn">30-minute planning call</span><span class="td">Talk through your plans, materials or a quote with Jesse</span></a>
     </div>
     <p class="giftlink"><a href="?gift" data-mode="gift"><span class="gl"><b>Give BUILT as a gift</b><span>Birthdays, holidays or any occasion. No building details needed.</span></span><span class="arrow">Gift it &rarr;</span></a></p>
     <figure>
@@ -199,6 +200,8 @@ html:not(.giftmode) .gift, html.giftmode .giftcta{display:none}
           <label class="choice" for="g-report"><input type="radio" id="g-report" name="Gift" value="Complete Material Report" checked> <span><b>$29</b> Complete Material Report</span></label>
           <label class="choice" for="g-attached"><input type="radio" id="g-attached" name="Gift" value="Complete Material Report with attached roof"> <span><b>$39</b> Complete Material Report for a building with a porch, lean-to, loft or other attached roof</span></label>
           <label class="choice" for="g-drawings"><input type="radio" id="g-drawings" name="Gift" value="Preliminary Framing Drawings + free report"> <span><b>$149</b> Preliminary Framing Drawings with DXF files and the Complete Material Report included free</span></label>
+          <label class="choice" for="g-roof"><input type="radio" id="g-roof" name="Gift" value="Shingle Roof Estimate"> <span><b>$29</b> Shingle Roof Estimate for their house or building</span></label>
+          <label class="choice" for="g-call"><input type="radio" id="g-call" name="Gift" value="30-Minute Planning Call"> <span><b>$39</b> 30-Minute Planning Call with Jesse</span></label>
           <p class="ghint">Not sure? Choose $29. If their building ends up with a porch, lean-to or loft, they pay the $10 difference when they order.</p>
         </div>
         <fieldset><legend>From</legend>
@@ -290,6 +293,21 @@ html:not(.giftmode) .gift, html.giftmode .giftcta{display:none}
             <span class="pick"></span>
           </span>
         </label>
+        <label class="svc">
+          <input type="radio" name="Service" id="svc-call" value="30-Minute Planning Call">
+          <span class="card">
+            <span class="price">$39</span>
+            <h3>30-Minute Planning Call</h3>
+            <ul>
+              <li>A phone or video call with Jesse</li>
+              <li>Go over your plans, size, layout and materials</li>
+              <li>Help reading your BUILT report or a contractor's quote</li>
+              <li>We call you to set a time after you order</li>
+              <li>Planning help only, not engineering, code or legal advice</li>
+            </ul>
+            <span class="pick"></span>
+          </span>
+        </label>
       </div>
       <label class="choice barn-only" for="attached"><input type="checkbox" id="attached" name="Has attached roof" value="Yes"> <span>My building has a porch, lean-to, wrap-around or other attached roof (tell us about it in 08), or a loft (06)</span></label>
     </section>
@@ -320,6 +338,19 @@ html:not(.giftmode) .gift, html.giftmode .giftcta{display:none}
         <div class="file">
           <label class="f" for="rooffiles">Photos (optional)<span class="hint">Photos of the roof help us check chimneys, vents and skylights. JPG, PNG or PDF.</span></label>
           <input type="file" id="rooffiles" name="attachment" accept=".pdf,.jpg,.jpeg,.png,.heic,image/*,application/pdf" multiple>
+        </div>
+      </div>
+    </section>
+
+    <section class="step call-only" aria-labelledby="scall" hidden>
+      <div class="step-head"><span class="num">02</span><h2 id="scall">Your call</h2></div>
+      <div class="panel">
+        <div class="q"><span class="ql">Call by</span><div class="opts"><label class="choice" for="cv1"><input type="radio" id="cv1" name="Call by" value="Phone" checked> <span>Phone</span></label><label class="choice" for="cv2"><input type="radio" id="cv2" name="Call by" value="Video"> <span>Video</span></label></div></div>
+        <label class="f" for="calltimes">Best days and times<span class="hint">We reach out to set the time. Phone number in step 01 is needed.</span><input type="text" id="calltimes" name="Best call times" placeholder="Weekday evenings after 5, or Saturday morning"></label>
+        <label class="f" for="calltopic">What do you want to talk about<textarea id="calltopic" name="Call topic" placeholder="Planning a 30x40 garage with a lean-to and want to go over sizes and materials."></textarea></label>
+        <div class="file">
+          <label class="f" for="callfiles">Files (optional)<span class="hint">A sketch, your BUILT report or a quote you want to go over. JPG, PNG or PDF.</span></label>
+          <input type="file" id="callfiles" name="attachment" accept=".pdf,.jpg,.jpeg,.png,.heic,image/*,application/pdf" multiple>
         </div>
       </div>
     </section>
@@ -461,7 +492,7 @@ html:not(.giftmode) .gift, html.giftmode .giftcta{display:none}
 </div>
 
 <footer><div class="wrap">
-  <p>BUILT provides material takeoffs, shingle roof estimates and preliminary framing drawings. We do not build structures or install roofs.</p>
+  <p>BUILT provides material takeoffs, shingle roof estimates, preliminary framing drawings and planning calls. We do not build structures or install roofs.</p>
   <p>Questions about an order? Reply to the email that comes with your files.</p>
 </div></footer>
 
@@ -488,6 +519,7 @@ function stamp(prefix){
 
 function order(){
   if ($("svc-roof").checked) return {key:"report", amount:29, label:"Shingle Roof Estimate"};
+  if ($("svc-call").checked) return {key:"reportAttached", amount:39, label:"30-Minute Planning Call"};
   const drawings = $("svc-drawings").checked;
   const attached = $("attached").checked;
   if (drawings) return {key:"drawings", amount:149, label:"Preliminary Framing Drawings with free Complete Material Report"};
@@ -497,18 +529,18 @@ function order(){
 /* Shingle roof estimate (2026-11-06): the barn steps are hidden and switched off, so their answers are not sent. */
 const barnSteps = [...document.querySelectorAll('section.step')].filter(s => /^s0[2-8]$/.test(s.getAttribute("aria-labelledby")));
 function setMode(){
-  const roof = $("svc-roof").checked;
+  const roof = $("svc-roof").checked, call = $("svc-call").checked, short = roof || call;
   barnSteps.concat([...document.querySelectorAll(".barn-only")]).forEach(el => {
-    el.hidden = roof;
-    el.querySelectorAll("input, select, textarea").forEach(f => f.disabled = roof);
+    el.hidden = short;
+    el.querySelectorAll("input, select, textarea").forEach(f => f.disabled = short);
   });
-  document.querySelectorAll(".roof-only").forEach(el => {
-    el.hidden = !roof;
-    el.querySelectorAll("input, select, textarea").forEach(f => f.disabled = !roof);
-  });
-  if (roof) $("attached").checked = false;
+  [[".roof-only", roof], [".call-only", call]].forEach(([sel, on]) => document.querySelectorAll(sel).forEach(el => {
+    el.hidden = !on;
+    el.querySelectorAll("input, select, textarea").forEach(f => f.disabled = !on);
+  }));
+  if (short) $("attached").checked = false;
   // Steps after the roof read 03 and 04 instead of 09 and 10.
-  [["s09","09","03"],["s5","10","04"]].forEach(([id, barn, short]) => { document.querySelector('[aria-labelledby="' + id + '"] .num').textContent = roof ? short : barn; });
+  [["s09","09","03"],["s5","10","04"]].forEach(([id, barn, sh]) => { document.querySelector('[aria-labelledby="' + id + '"] .num').textContent = short ? sh : barn; });
 }
 document.querySelectorAll('input[name="Service"]').forEach(r => r.addEventListener("change", setMode));
 document.querySelectorAll(".tile[data-pick]").forEach(t => t.addEventListener("click", e => {
@@ -554,11 +586,12 @@ form.addEventListener("submit", e => {
   const problems = [];
   if (!$("name").value.trim()) problems.push("your name");
   if (!/^\S+@\S+\.\S+$/.test($("email").value.trim())) problems.push("an email address for your files");
-  const roof = $("svc-roof").checked;
+  const roof = $("svc-roof").checked, call = $("svc-call").checked;
   if (roof && !$("roofaddr").value.trim()) problems.push("the address of the roof");
-  if (!roof && (!$("w").value || !$("l").value)) problems.push("the building width and length");
-  if (!$("ack").checked) problems.push("the checkbox in step " + (roof ? "04" : "10"));
-  const size = [...$("files").files, ...$("rooffiles").files].reduce((s, f) => s + f.size, 0);
+  if (call && !$("phone").value.trim()) problems.push("a phone number in step 01 so we can set up your call");
+  if (!roof && !call && (!$("w").value || !$("l").value)) problems.push("the building width and length");
+  if (!$("ack").checked) problems.push("the checkbox in step " + (roof || call ? "04" : "10"));
+  const size = [...$("files").files, ...$("rooffiles").files, ...$("callfiles").files].reduce((s, f) => s + f.size, 0);
   if (size > MAX_BYTES) problems.push("files under 10 MB in total");
   const code = giftCode();
   if (code && !GIFT_CODE.test(code)) problems.push("the gift code as it is on the certificate (GIFT-XXXX-XXXX)");
@@ -569,7 +602,7 @@ form.addEventListener("submit", e => {
   $("orderno").value = no;
   $("total").value = "$" + o.amount + " " + o.label;
   if (code) $("giftcode").value = code;
-  $("subject").value = "New BUILT order " + no + ": " + (code ? "gift code " + code + " for $" + o.amount : "$" + o.amount) + " " + (roof ? "shingle roof, " + $("roofaddr").value.trim() : $("w").value + "x" + $("l").value);
+  $("subject").value = "New BUILT order " + no + ": " + (code ? "gift code " + code + " for $" + o.amount : "$" + o.amount) + " " + (roof ? "shingle roof, " + $("roofaddr").value.trim() : call ? "30-minute call, " + $("phone").value.trim() : $("w").value + "x" + $("l").value);
 
   const link = CONFIG.pay[o.key];
   const pay = link ? new URL(link) : null;
@@ -596,6 +629,8 @@ const gform = $("giftform");
 function gift(){
   if ($("g-drawings").checked) return {key:"drawings", amount:149, label:"Preliminary Framing Drawings + free report"};
   if ($("g-attached").checked) return {key:"reportAttached", amount:39, label:"Complete Material Report with attached roof"};
+  if ($("g-roof").checked) return {key:"report", amount:29, label:"Shingle Roof Estimate"};
+  if ($("g-call").checked) return {key:"reportAttached", amount:39, label:"30-Minute Planning Call"};
   return {key:"report", amount:29, label:"Complete Material Report"};
 }
 function grefresh(){ const g = gift(); $("g-amt").textContent = "$" + g.amount; $("g-what").textContent = "Gift: " + g.label; }
