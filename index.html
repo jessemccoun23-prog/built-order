@@ -144,6 +144,14 @@ html:not(.giftmode) .gift, html.giftmode .giftcta{display:none}
 .gift .ghint{margin:-2px 0 0 30px;font-size:14px;color:var(--muted)}
 .done{border-radius:8px;padding:16px 18px;background:var(--accent-soft);font-size:16px;margin-top:18px}
 @media (prefers-reduced-motion: reduce){*{transition:none!important}}
+.two{display:inline-block;font:700 11px/1 var(--label);letter-spacing:.1em;text-transform:uppercase;background:var(--accent);color:var(--accent-ink);border-radius:4px;padding:4px 7px;vertical-align:2px;margin-left:6px}
+.two.big{justify-self:start;font-size:13px;padding:7px 10px;margin:0}
+.duo{display:grid;gap:8px}
+.rep{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start;border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:6px;padding:10px 12px;background:var(--bg)}
+.rep .rn{font:700 20px/1.1 var(--label);color:var(--accent)}
+.rep .rb b{font:700 15px/1.3 var(--label);color:var(--ink)}
+.rep ul{margin:4px 0 0}
+.plus{justify-self:center;font:700 24px/1 var(--label);color:var(--accent)}
 </style>
 
 <script>if (/[?&]gift(=|&|$)/.test(location.search) || location.hash === "#gift") document.documentElement.classList.add("giftmode");</script>
@@ -156,7 +164,7 @@ html:not(.giftmode) .gift, html.giftmode .giftcta{display:none}
     <p>Tell us about your building or roof, add any plans, sketches or photos you have, then pay securely. We check every order by hand and email your files.</p>
     <div class="tiles" aria-label="What we offer">
       <a class="tile" href="#s1" data-pick="svc-report"><span class="tp">$29</span><span class="tn">Material report</span><span class="td">Lumber and metal lists, order sheets and 3D views</span></a>
-      <a class="tile" href="#s1" data-pick="svc-roof"><span class="tp">$29</span><span class="tn">Shingle roof estimate</span><span class="td">Squares and a full shingle material list from your address. Contractors: your logo and labor price on request</span></a>
+      <a class="tile" href="#s1" data-pick="svc-roof"><span class="tp">$29</span><span class="tn">Roof + gutter estimate <span class="two">2 reports</span></span><span class="td">A shingle roof estimate and a separate gutter report from your address. Contractors: your logo and labor price on request</span></a>
       <a class="tile" href="#s1" data-pick="svc-drawings"><span class="tp">$149</span><span class="tn">Framing drawings</span><span class="td">PDF and DXF drawing set, with the barn report free</span></a>
       <a class="tile" href="#s1" data-pick="svc-call"><span class="tp">$39</span><span class="tn">30-minute planning call</span><span class="td">Talk through your plans, materials or a quote with Jesse</span></a>
     </div>
@@ -200,7 +208,7 @@ html:not(.giftmode) .gift, html.giftmode .giftcta{display:none}
           <label class="choice" for="g-report"><input type="radio" id="g-report" name="Gift" value="Complete Material Report" checked> <span><b>$29</b> Complete Material Report</span></label>
           <label class="choice" for="g-attached"><input type="radio" id="g-attached" name="Gift" value="Complete Material Report with attached roof"> <span><b>$39</b> Complete Material Report for a building with a porch, lean-to, loft or other attached roof</span></label>
           <label class="choice" for="g-drawings"><input type="radio" id="g-drawings" name="Gift" value="Preliminary Framing Drawings + free report"> <span><b>$149</b> Preliminary Framing Drawings with DXF files and the Complete Material Report included free</span></label>
-          <label class="choice" for="g-roof"><input type="radio" id="g-roof" name="Gift" value="Shingle Roof Estimate"> <span><b>$29</b> Shingle Roof Estimate for their house or building</span></label>
+          <label class="choice" for="g-roof"><input type="radio" id="g-roof" name="Gift" value="Shingle Roof Estimate"> <span><b>$29</b> Roof + Gutter Estimate (2 reports) for their house or building</span></label>
           <label class="choice" for="g-call"><input type="radio" id="g-call" name="Gift" value="30-Minute Planning Call"> <span><b>$39</b> 30-Minute Planning Call with Jesse</span></label>
           <p class="ghint">Not sure? Choose $29. If their building ends up with a porch, lean-to or loft, they pay the $10 difference when they order.</p>
         </div>
@@ -282,13 +290,25 @@ html:not(.giftmode) .gift, html.giftmode .giftcta{display:none}
           <input type="radio" name="Service" id="svc-roof" value="Shingle Roof Estimate">
           <span class="card">
             <span class="price">$29</span>
-            <h3>Shingle Roof Estimate</h3>
+            <span class="two big">2 reports, 1 price: better value</span>
+            <h3>Roof + Gutter Estimate</h3>
+            <span class="duo">
+              <span class="rep"><span class="rn">1</span><span class="rb"><b>Shingle Roof Estimate</b>
+                <ul>
+                  <li>Roof measured from aerial imagery: squares, pitches and waste</li>
+                  <li>Full shingle material list: shingles, starter, ridge cap, underlayment, ice and water, drip edge, vents and flashing</li>
+                </ul></span></span>
+              <span class="plus" aria-hidden="true">+</span>
+              <span class="rep"><span class="rn">2</span><span class="rb"><b>Gutter Report</b>
+                <ul>
+                  <li>Gutter and downspout lengths</li>
+                  <li>Corner and miter counts</li>
+                  <li>Install diagram for every run</li>
+                </ul></span></span>
+            </span>
             <ul>
-              <li>Roof measured from aerial imagery: squares, pitches and waste</li>
-              <li>Full shingle material list: shingles, starter, ridge cap, underlayment, ice and water, drip edge, vents and flashing</li>
-              <li>Just send the address</li>
-              <li>Shingle roofs only</li>
-              <li>Contractors: we can put your logo on it and add your labor price for your customers</li>
+              <li>Just send the address. Shingle roofs only.</li>
+              <li>Contractors: we can put your logo on both reports and add your labor price for your customers</li>
             </ul>
             <span class="pick"></span>
           </span>
@@ -334,7 +354,7 @@ html:not(.giftmode) .gift, html.giftmode .giftcta{display:none}
       <div class="panel">
         <label class="f" for="roofaddr">Address of the house or building<input type="text" id="roofaddr" name="Roof address" autocomplete="street-address" placeholder="123 Main St, New Philadelphia, OH 44663"></label>
         <label class="f" for="roofbrand">Shingle brand and line<span class="hint">If you know it. Leave blank and we use a standard architectural shingle.</span><input type="text" id="roofbrand" name="Shingle brand" placeholder="Owens Corning Duration, GAF Timberline HDZ"></label>
-        <label class="f" for="roofnotes">Anything we should know<span class="hint">Which buildings on the property, tear-off and layers, gutters, skylights.</span><textarea id="roofnotes" name="Roof notes" placeholder="House and attached garage only. One layer to tear off."></textarea></label>
+        <label class="f" for="roofnotes">Anything we should know<span class="hint">Which buildings on the property, tear-off and layers, skylights. Gutters are measured for you.</span><textarea id="roofnotes" name="Roof notes" placeholder="House and attached garage only. One layer to tear off."></textarea></label>
         <div class="file">
           <label class="f" for="rooffiles">Photos (optional)<span class="hint">Photos of the roof help us check chimneys, vents and skylights. JPG, PNG or PDF.</span></label>
           <input type="file" id="rooffiles" name="attachment" accept=".pdf,.jpg,.jpeg,.png,.heic,image/*,application/pdf" multiple>
@@ -518,7 +538,7 @@ function stamp(prefix){
 }
 
 function order(){
-  if ($("svc-roof").checked) return {key:"report", amount:29, label:"Shingle Roof Estimate"};
+  if ($("svc-roof").checked) return {key:"report", amount:29, label:"Roof + Gutter Estimate (2 reports)"};
   if ($("svc-call").checked) return {key:"reportAttached", amount:39, label:"30-Minute Planning Call"};
   const drawings = $("svc-drawings").checked;
   const attached = $("attached").checked;
@@ -629,7 +649,7 @@ const gform = $("giftform");
 function gift(){
   if ($("g-drawings").checked) return {key:"drawings", amount:149, label:"Preliminary Framing Drawings + free report"};
   if ($("g-attached").checked) return {key:"reportAttached", amount:39, label:"Complete Material Report with attached roof"};
-  if ($("g-roof").checked) return {key:"report", amount:29, label:"Shingle Roof Estimate"};
+  if ($("g-roof").checked) return {key:"report", amount:29, label:"Roof + Gutter Estimate (2 reports)"};
   if ($("g-call").checked) return {key:"reportAttached", amount:39, label:"30-Minute Planning Call"};
   return {key:"report", amount:29, label:"Complete Material Report"};
 }
